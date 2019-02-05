@@ -6,7 +6,7 @@ var fs = require('fs');
 
 var languages = {};
 var settings = {};
-var savePath = path.join(process.cwd(), 'src', 'ep_translate_all');
+var savePath = path.join(process.cwd(), 'src', 'ep_translations');
 
 var loadTranslations = function () {
     fs.readdir(savePath, function (err, files) {
@@ -24,13 +24,15 @@ var loadTranslations = function () {
 };
 
 exports.loadSettings = function (hook_name, context) {
-    settings = context.settings.ep_translate_all;
+    settings = context.settings.ep_translations;
 };
 
 exports.clientVars = function (hook, context, callback) {
     if (settings.mode === 'git') {
         cloneOrPull(settings.path, savePath, function(err) {
-            if (err) throw err;
+            if (err) {
+                console.log(err);
+            }
 
             loadTranslations();
             // Use repo
@@ -39,5 +41,5 @@ exports.clientVars = function (hook, context, callback) {
         loadTranslations();
     }
 
-    return callback({"ep_translate_all": {"languages": languages}});
+    return callback({"ep_translations": {"languages": languages}});
 };

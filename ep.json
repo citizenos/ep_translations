@@ -1,14 +1,14 @@
 {
     "parts": [
       {
-        "name":"ep_translate_all",
+        "name":"ep_translations",
         "post": ["ep_etherpad-lite/static"],
         "client_hooks": {
-            "aceInitialized": "ep_translate_all/static/js/index"
+            "aceInitialized": "ep_translations/static/js/index"
         },
         "hooks": {
-            "loadSettings": "ep_translate_all/index",
-            "clientVars": "ep_translate_all/index"
+            "loadSettings": "ep_translations/index",
+            "clientVars": "ep_translations/index"
         }
       }
     ]
