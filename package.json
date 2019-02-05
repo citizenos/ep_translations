@@ -1,0 +1,8 @@
+{
+    "name": "ep_translations",
+    "description": "Plugin to override etherpad and its plugins translations",
+    "version": "0.0.1",
+    "dependencies": {
+        "git-clone-or-pull": "3.1.1"
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "parts": [
+      {
+        "name":"ep_translate_all",
+        "post": ["ep_etherpad-lite/static"],
+        "client_hooks": {
+            "aceInitialized": "ep_translate_all/static/js/index"
+        },
+        "hooks": {
+            "loadSettings": "ep_translate_all/index",
+            "clientVars": "ep_translate_all/index"
+        }
+      }
+    ]
+  }
+  
