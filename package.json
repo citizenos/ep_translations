@@ -1,5 +1,10 @@
 {
     "name": "ep_translations",
+    "author": {
+        "name": "Ilmar Türk",
+        "email": "ilmar.tyrk@gmail.com",
+        "organization": "Citizen OS"
+    },
     "description": "Plugin to override etherpad and its plugins translations",
     "version": "0.0.1",
     "dependencies": {

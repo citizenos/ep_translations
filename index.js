@@ -10,8 +10,6 @@ var savePath = path.join(process.cwd(), 'src', 'ep_translations');
 
 var loadTranslations = function () {
     fs.readdir(savePath, function (err, files) {
-        console.log('languages', files);
-
         files.forEach(function (file) {
             if (file.indexOf('.json') > -1 && file !== 'source.json') {
                 var lang = file.split('.')[0];
@@ -29,9 +27,19 @@ exports.loadSettings = function (hook_name, context) {
 
 exports.clientVars = function (hook, context, callback) {
     if (settings.mode === 'git') {
-        cloneOrPull(settings.path, savePath, function(err) {
+        var options = {
+            path: savePath
+        };
+        if (settings.branch) {
+            options.branch = settings.branch;
+        }
+        if (settings.implementation) {
+            options.implementation = settings.implementation;
+        }
+
+        cloneOrPull(settings.path, options, function(err) {
             if (err) {
-                console.log(err);
+                console.error('ep_translations', err);
             }
 
             loadTranslations();
