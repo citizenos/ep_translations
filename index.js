@@ -26,7 +26,7 @@ exports.loadSettings = function (hook_name, context) {
 };
 
 exports.clientVars = function (hook, context, callback) {
-    if (settings.mode === 'git') {
+    if (settings.type === 'git') {
         var options = {
             path: savePath
         };
