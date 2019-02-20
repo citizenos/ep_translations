@@ -1,4 +1,4 @@
-#Plugin to override etherpad and it's plugins translations
+# Plugin to override etherpad and it's plugins translations
 
 This plugin uses sepparate translations folder that contains files which override all other plugin translations.
 As all plugins are translated sepparatly in each project, there might me cases where translations are missing for some languages.
