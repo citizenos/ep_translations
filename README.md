@@ -12,6 +12,7 @@ Plugin config for using git
     "path": "<path to git repo>",
     "branch" "<branch name>", //name of branch, if not set, default is master
     "implementation": "<name of implementation>" //if not set, default is nodegit
+    "savePath": "/path/to/translaions/location" //by default is set to node_modules/ep_translations/locales
   }
 ```
 

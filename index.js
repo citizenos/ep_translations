@@ -6,10 +6,14 @@ var fs = require('fs');
 
 var languages = {};
 var settings = {};
-var savePath = path.join(process.cwd(), 'src', 'ep_translations');
+var savePath = path.join(process.cwd(),'node_modules', 'ep_translations', 'locales'); //defaults to node_module folder
 
 var loadTranslations = function () {
     fs.readdir(savePath, function (err, files) {
+        if (err) throw err;
+        if (!files || !files.length) {
+            return;
+        }
         files.forEach(function (file) {
             if (file.indexOf('.json') > -1 && file !== 'source.json') {
                 var lang = file.split('.')[0];
@@ -26,6 +30,9 @@ exports.loadSettings = function (hook_name, context) {
 };
 
 exports.clientVars = function (hook, context, callback) {
+    if (settings.savePath) {
+        savePath = settings.savePath;
+    }
     if (settings.type === 'git') {
         var options = {
             path: savePath
