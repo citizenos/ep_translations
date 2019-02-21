@@ -1,13 +1,25 @@
 {
-    "name": "ep_translations",
-    "author": {
-        "name": "Ilmar Türk",
-        "email": "ilmar.tyrk@gmail.com",
-        "organization": "Citizen OS"
-    },
-    "description": "Plugin to override etherpad and its plugins translations",
-    "version": "0.0.1",
-    "dependencies": {
-        "git-clone-or-pull": "3.1.1"
-    }
+  "name": "ep_translations",
+  "author": "Ilmar Türk <ilmar.tyrk@gmail.com>",
+  "description": "Plugin to override etherpad and its plugins translations",
+  "version": "0.0.1",
+  "dependencies": {
+    "git-clone-or-pull": "3.1.1"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/citizenos/ep_translations.git"
+  },
+  "keywords": [
+    "etherpad"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/citizenos/ep_translations/issues"
+  },
+  "homepage": "https://github.com/citizenos/ep_translations#readme"
 }
