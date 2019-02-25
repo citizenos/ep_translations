@@ -18,7 +18,11 @@ var loadTranslations = function () {
             if (file.indexOf('.json') > -1 && file !== 'source.json') {
                 var lang = file.split('.')[0];
                 fs.readFile(path.join(savePath, file), function (err, data) {
-                    languages[lang] = JSON.parse(data);
+                    var languageData = JSON.parse(data);
+                    Object.keys(languageData).forEach(function (key) {
+                        if (languageData[key] == null || languageData[key] === '') delete languageData[key];
+                    });
+                    languages[lang] = languageData;
                 });
             }
         });
