@@ -2,9 +2,9 @@
   "name": "ep_translations",
   "author": "Ilmar Türk <ilmar.tyrk@gmail.com>",
   "description": "Plugin to override etherpad and its plugins translations",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "dependencies": {
-    "git-clone-or-pull": "3.1.1"
+    "git-clone-or-pull": "git+https://github.com/citizenos/node-git-clone-or-pull#31bd4698baf23de001a435826595bb4c38928b9d"
   },
   "main": "index.js",
   "scripts": {
