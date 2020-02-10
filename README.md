@@ -1,11 +1,14 @@
-# Plugin to override etherpad and it's plugins translations
+# ep_translations
+
+**A Plugin to override etherpad and it's plugins translations**
 
 This plugin uses sepparate translations folder that contains files which override all other plugin translations.
-As all plugins are translated sepparatly in each project, there might me cases where translations are missing for some languages.
-Also sometimes translations might not be as accurate or look a little clumsy. This plugin can load translations from sepparate git repository on the go, or use static commited files that are stored in `/src/ep_translations` folder
+As all plugins are translated separately in each project, there might me cases where translations are missing for some languages.
+Also sometimes translations might not be as accurate or look a little clumsy. This plugin can load translations from separate Git repository on the go, or use static committed files that are stored in `/src/ep_translations` folder
 
-for git config details look: https://github.com/strugee/node-git-clone-or-pull
-Plugin config for using git
+For git config details look: https://github.com/strugee/node-git-clone-or-pull
+
+Plugin config for using Git:
 ``` javascript
 "ep_translations":{
     "type": "git",
@@ -18,4 +21,4 @@ Plugin config for using git
 
 ## Credits
 
-* [CitizenOS](https://citizenos.com) for funding the development 
+* [Citizen OS](https://citizenos.com) for funding the development 
