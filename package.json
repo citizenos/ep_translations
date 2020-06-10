@@ -4,7 +4,7 @@
   "description": "Plugin to override etherpad and its plugins translations",
   "version": "0.0.4",
   "dependencies": {
-    "git-clone-or-pull": "git+https://github.com/citizenos/node-git-clone-or-pull#31bd4698baf23de001a435826595bb4c38928b9d"
+    "git-clone-or-pull": "git+https://github.com/citizenos/node-git-clone-or-pull#ec4813fe421d65277d10fb49d0a2d1a357065a35"
   },
   "main": "index.js",
   "scripts": {
