@@ -8,32 +8,40 @@ var languages = {};
 var settings = {};
 var savePath = path.join(process.cwd(),'node_modules', 'ep_translations', 'locales'); //defaults to node_module folder
 
-var loadTranslations = function () {
+var loadTranslations = function (callback) {
     fs.readdir(savePath, function (err, files) {
-        if (err) throw err;
+        if (err) return reject(err);
         if (!files || !files.length) {
             return;
         }
-        files.forEach(function (file) {
+        var i = 0;
+        var called = false;
+        var filtered = files.filter(function (file) {
             if (file.indexOf('.json') > -1 && file !== 'source.json') {
-                var lang = file.split('.')[0];
-                fs.readFile(path.join(savePath, file), function (err, data) {
-                    var languageData = JSON.parse(data);
-                    Object.keys(languageData).forEach(function (key) {
-                        if (languageData[key] == null || languageData[key] === '') delete languageData[key];
-                    });
-                    languages[lang] = languageData;
-                });
+                return file;
             }
+        });
+
+        filtered.forEach(function (file) {
+            var lang = file.split('.')[0];
+            fs.readFile(path.join(savePath, file), function (err, data) {
+                var languageData = JSON.parse(data);
+                Object.keys(languageData).forEach(function (key) {
+                    if (languageData[key] == null || languageData[key] === '') delete languageData[key];
+                });
+                languages[lang] = languageData;
+                i++;
+                if(i === files.length && !called) {
+                    called = true;
+                    callback();
+                }
+            });
         });
     });
 };
 
-exports.loadSettings = function (hook_name, context) {
+exports.loadSettings = function (hook_name, context, cb) {
     settings = context.settings.ep_translations;
-};
-
-exports.clientVars = function (hook, context, callback) {
     if (settings.savePath) {
         savePath = settings.savePath;
     }
@@ -53,12 +61,13 @@ exports.clientVars = function (hook, context, callback) {
                 console.error('ep_translations', err);
             }
 
-            loadTranslations();
-            // Use repo
+            loadTranslations(cb);
         });
     } else {
-        loadTranslations();
+        loadTranslations(cb);
     }
+};
 
-    return callback({"ep_translations": {"languages": languages}});
+exports.clientVars = function (hook, context, callback) {
+    callback({ep_translations: {languages}});
 };

@@ -21,5 +21,5 @@ exports.aceInitialized = function (hook, name) {
 
         html10n.localize([language, navigator.language, navigator.userLanguage, 'en'])
     });
-}; 
+};
 
