@@ -74,6 +74,4 @@ exports.loadSettings = async (hook, context) => {
   }
 };
 
-exports.clientVars = (hook, context, cb) => {
-  return cb({ep_translations: { languages }});
-};
+exports.clientVars = (hook, context, cb) => cb({ep_translations: {languages}}); // eslint-disable-line camelcase, max-len

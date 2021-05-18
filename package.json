@@ -11,12 +11,15 @@
     "git-clone-or-pull": "4.0.0"
   },
   "devDependencies": {
-    "eslint": "^7.14.0",
-    "eslint-config-etherpad": "^1.0.8",
-    "eslint-plugin-mocha": "^8.0.0",
+    "eslint": "^7.26.0",
+    "eslint-config-etherpad": "^1.0.27",
+    "eslint-plugin-cypress": "^2.11.3",
+    "eslint-plugin-eslint-comments": "^3.2.0",
+    "eslint-plugin-mocha": "^8.1.0",
     "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prefer-arrow": "^1.2.2",
-    "eslint-plugin-promise": "^4.2.1"
+    "eslint-plugin-prefer-arrow": "^1.2.3",
+    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-you-dont-need-lodash-underscore": "^6.11.0"
   },
   "eslintConfig": {
     "root": true,
@@ -28,6 +31,12 @@
   "keywords": [
     "etherpad"
   ],
+  "scripts": {
+    "lint": "eslint ."
+  },
+  "peerDependencies": {
+    "ep_etherpad-lite": ">=1.8.6"
+  },
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/citizenos/ep_translations/issues"
