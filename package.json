@@ -2,7 +2,7 @@
   "name": "ep_translations",
   "author": "Ilmar Türk <ilmar.tyrk@gmail.com>",
   "description": "Plugin to override etherpad and its plugins translations",
-  "version": "0.0.6",
+  "version": "0.0.8",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/citizenos/ep_translations.git"
