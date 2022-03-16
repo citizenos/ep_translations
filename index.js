@@ -62,6 +62,10 @@ exports.loadSettings = async (hook, context) => {
       options.implementation = settings.implementation;
     }
 
+    if (!fs.existsSync(savePath)) {
+      fs.mkdirSync(savePath, {recursive: true});
+    }
+
     await cloneOrPull(settings.path, options, async (err, res) => {
       if (err) {
         console.error('ep_translations', err, res);
