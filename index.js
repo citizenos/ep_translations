@@ -1,6 +1,6 @@
 'use strict';
 
-const NodeGit = require('nodegit');
+const gitPullOrClone = require('git-pull-or-clone')
 const path = require('path');
 const fs = require('fs');
 
@@ -9,27 +9,12 @@ let settings = {};
 // defaults to node_module folder
 let savePath = path.join(process.cwd(), 'node_modules', 'ep_translations', 'locales');
 
-const cloneOrPull = async (url, options) => {
-  if (!options.branch) {
-    options.branch = 'master';
-  }
-  try {
-    fs.accessSync(options.path);
-    // Cloned already; we need to pull
-    const repository = await NodeGit.Repository.open(options.path);
-    await repository.fetchAll();
-    return repository.mergeBranches(options.branch, `origin/${options.branch}`);
-  } catch (err) {
-    // Not yet cloned
-    console.log('ERR', err);
-    try {
-      fs.mkdirSync(savePath, {recursive: true});
-      return NodeGit.Clone(url, options.path); // eslint-disable-line new-cap
-    } catch (err) {
-      console.log('CLONE ERROR', err);
-    }
-  }
-};
+const cloneOrPull = async (url, options) => new Promise((resolve) => {
+  gitPullOrClone(url, options.path, (err) => {
+    if (err) throw err;
+    return resolve();
+  });
+});
 
 const loadTranslations = async () => {
   const files = fs.readdirSync(savePath);
@@ -92,4 +77,4 @@ exports.loadSettings = async (hook, context) => {
   }
 };
 
-exports.clientVars = (hook, context, cb) => cb({ep_translations: {languages}}); // eslint-disable-line camelcase, max-len
+exports.clientVars = (hook, context, cb) => cb({ ep_translations: { languages } }); // eslint-disable-line camelcase, max-len

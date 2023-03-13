@@ -8,7 +8,7 @@
     "url": "git+https://github.com/citizenos/ep_translations.git"
   },
   "dependencies": {
-    "nodegit": "^0.27.0"
+    "git-pull-or-clone": "^2.0.2"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^5.29.0",
