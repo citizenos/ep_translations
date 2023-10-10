@@ -2,7 +2,7 @@
 
 const simpleGit = require('simple-git');
 const path = require('path');
-const fs = require('fs');
+const fs = require('fs/promises');
 
 const languages = {};
 let settings = {};
@@ -10,7 +10,18 @@ let settings = {};
 let savePath = path.join(process.cwd(), 'node_modules', 'ep_translations', 'locales');
 
 const cloneOrPull = async (url, options) => {
-  const git = simpleGit(options.path);
+  try {
+    await fs.access(savePath);
+} catch (err) {
+    console.info('ep_translate no translations directory', err);
+    try {
+      await fs.mkdir(savePath, {recursive: true});
+    } catch (err) {
+      console.error('ep_translate PATH ERROR', err);
+    }
+}
+
+  const git = simpleGit(savePath);
   const initialiseRepo = async (git) => {
     await git.init();
     return git.addRemote('origin', url);
@@ -18,12 +29,11 @@ const cloneOrPull = async (url, options) => {
 
   const isRepo = await git.checkIsRepo();
   if (!isRepo) await initialiseRepo(git);
-
-  git.fetch();
+  await git.pull(options.remote || 'origin', options.branch || 'master');
 };
 
 const loadTranslations = async () => {
-  const files = fs.readdirSync(savePath);
+  const files = await fs.readdir(savePath);
   if (!files || !files.length) {
     return;
   }
@@ -36,7 +46,7 @@ const loadTranslations = async () => {
   let called = false;
   filtered.forEach(async (file) => {
     const lang = file.split('.')[0];
-    const data = await fs.readFileSync(path.join(savePath, file));
+    const data = await fs.readFile(path.join(savePath, file));
     try {
       const languageData = JSON.parse(data);
       Object.keys(languageData).forEach((key) => {
