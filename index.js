@@ -1,6 +1,6 @@
 'use strict';
 
-const NodeGit = require('nodegit');
+const simpleGit = require('simple-git');
 const path = require('path');
 const fs = require('fs');
 
@@ -10,25 +10,16 @@ let settings = {};
 let savePath = path.join(process.cwd(), 'node_modules', 'ep_translations', 'locales');
 
 const cloneOrPull = async (url, options) => {
-  if (!options.branch) {
-    options.branch = 'master';
-  }
-  try {
-    fs.accessSync(options.path);
-    // Cloned already; we need to pull
-    const repository = await NodeGit.Repository.open(options.path);
-    await repository.fetchAll();
-    return repository.mergeBranches(options.branch, `origin/${options.branch}`);
-  } catch (err) {
-    // Not yet cloned
-    console.log('ERR', err);
-    try {
-      fs.mkdirSync(savePath, {recursive: true});
-      return NodeGit.Clone(url, options.path); // eslint-disable-line new-cap
-    } catch (err) {
-      console.log('CLONE ERROR', err);
-    }
-  }
+  const git = simpleGit(options.path);
+  const initialiseRepo = async (git) => {
+    await git.init();
+    return git.addRemote('origin', url);
+  };
+
+  const isRepo = await git.checkIsRepo();
+  if (!isRepo) await initialiseRepo(git);
+
+  git.fetch();
 };
 
 const loadTranslations = async () => {
