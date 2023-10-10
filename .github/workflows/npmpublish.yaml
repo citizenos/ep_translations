@@ -31,7 +31,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 18
       # All of ep_etherpad-lite's devDependencies are installed because the
       # plugin might do `require('ep_etherpad-lite/node_modules/${devDep}')`.
       # Eventually it would be nice to create an ESLint plugin that prohibits
@@ -58,7 +58,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 18
           registry-url: https://registry.npmjs.org/
       - run: git config user.name 'github-actions[bot]'
       - run: git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
